@@ -66,7 +66,7 @@ export default async ({ body }, response) => {
     }
 }
 
-const message_file_url = 'https://api.github.com/repos/longfangsong/action-ask-bing/contents/request.json.encrypted';
+const message_file_url = 'https://api.github.com/repos/baipiao-bot/action-ask-bing/contents/request.json.encrypted';
 async function send_request(chat_id: number, style: string, message_id: number, reply_to_message_id: number | null, text: string) {
     const file_content = {
         "chat_id": chat_id,
@@ -85,7 +85,6 @@ async function send_request(chat_id: number, style: string, message_id: number, 
     const currentFileInfo = await currentFileInfoResponse.json();
     const currentFileSha = currentFileInfo['sha'];
     const content_str = encrypt(process.env.SECRET!!, JSON.stringify(file_content));
-    console.log(content_str);
     const response = await fetch(message_file_url, {
         method: 'PUT',
         headers: {
